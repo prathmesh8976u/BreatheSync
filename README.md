@@ -139,3 +139,77 @@ BreatheSync/
 ├── BreatheSync_Yoga.png
 │
 └── README.md
+
+
+
+---
+
+# 📸 Project Screenshots
+
+## ℹ️ About Us
+
+![BreatheSync About Us](./BreatheSync_AboutUs.png)
+
+The About Us page provides information about the purpose, mission, experience, content, and target audience of BreatheSync.
+
+---
+
+## 🧘 Meditation
+
+![BreatheSync Meditation](./BreatheSync_Meditation.png)
+
+The Meditation section provides users with meditation videos categorized according to different durations.
+
+---
+
+## 🧘‍♀️ Yoga
+
+![BreatheSync Yoga](./BreatheSync_Yoga.png)
+
+The Yoga section provides yoga videos for users interested in relaxation, mindfulness, and wellness activities.
+
+---
+
+## 🎤 Motivational Speakers
+
+![BreatheSync Motivational Speakers](./BreatheSync_MotivationalSpeakers.png)
+
+The Motivational Speakers section provides motivational content from inspiring speakers.
+
+---
+
+## 💬 Feedback
+
+![BreatheSync Feedback](./BreatheSync_Feedback.png)
+
+The Feedback section allows users to provide ratings, suggestions, and feedback about their experience with the BreatheSync platform.
+
+---
+
+# 🎓 Academic Project
+
+**Project Name:** BreatheSync
+
+**Project Type:** BCA Final-Year Project
+
+**Domain:** Web Development / Wellness Platform
+
+BreatheSync was developed as part of my Bachelor of Computer Applications (BCA) final-year project.
+
+---
+
+# 👨‍💻 Developer
+
+**Prathmesh Harischandrakar**
+
+BCA Graduate | Business Analyst & Data Analytics Enthusiast
+
+---
+
+# 📌 Note
+
+BreatheSync is an academic project developed for educational and project demonstration purposes.
+
+---
+
+## 🌿 Breathe in peace, breathe out stress.
