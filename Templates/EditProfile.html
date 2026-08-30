@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #468f70, #020f1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 30px;
+      color: white;
+    }
+    .form-box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      border-radius: 15px;
+      width: 380px;
+    }
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffde59;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+      font-size: 14px;
+      color: #ffde59;
+    }
+    .password-section {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #ffde59;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .delete-btn {
+      background: #e74c3c;
+    }
+    .message {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .show-password {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+    .show-password input {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Edit Profile</h2>
+    <form method="POST">
+      <label for="username">Username</label>
+      <input type="text" name="username" value="{{ user.username }}" required />
+
+      <label for="email">Email</label>
+      <input type="email" name="email" value="{{ user.email }}" required />
+
+      <div class="password-section">
+        <label>Change/Update Password (Optional)</label>
+        <input type="password" name="old_password" id="old_password" placeholder="Old Password" />
+        <input type="password" name="new_password" id="new_password" placeholder="New Password" />
+
+        <div class="show-password">
+          <input type="checkbox" id="showPassword" onclick="togglePassword()">
+          <label for="showPassword" style="font-weight: normal;">Show Password</label>
+        </div>
+      </div>
+
+      <button type="submit" name="action" value="update">Update Profile</button>
+      <button type="submit" name="action" value="delete" class="delete-btn" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <script>
+    function togglePassword() {
+      var oldPassword = document.getElementById("old_password");
+      var newPassword = document.getElementById("new_password");
+
+      if (oldPassword.type === "password") {
+        oldPassword.type = "text";
+        newPassword.type = "text";
+      } else {
+        oldPassword.type = "password";
+        newPassword.type = "password";
+      }
+    }
+  </script>
+</body>
+</html>

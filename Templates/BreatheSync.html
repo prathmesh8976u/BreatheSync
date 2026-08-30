@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BreatheSync</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/BreatheSync.css') }}" />
+  <style>
+    /* Extra toast styling */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+    .toast-body {
+      font-weight: 500;
+      color: #004d40;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/ChatGPT Image Apr 9, 2025, 10_29_52 AM.png') }}" alt="BreatheSync" class="navbar-logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}#about"><i class="fas fa-info-circle"></i> About Us</a>
+          </li>
+
+          <li class="nav-item dropdown protected-link">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-leaf"></i> Categories</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('yoga') }}">🧎 Yoga</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('meditation') }}">🧘‍♂️ Meditation</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('relaxation') }}">🎵 Relaxation</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('spiritual') }}">☘️ Spiritual</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown protected-link">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">🎤 Motivational Speakers</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#Gopal">😄 Gaur Gopal das</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#sad">🧙‍♂️ Sadhguru</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#Nicholas">🌟 Nicholas James Vujicic</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#tony">⚡ Tony Robbins</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item protected-link">
+            <a class="nav-link" href="{{ url_for('blog') }}"><i class="fas fa-blog"></i> Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('feedback') }}"><i class="fas fa-comments"></i> Feedback</a>
+          </li>
+        </ul>
+       
+        
+        
+
+        <ul class="navbar-nav ms-auto">
+          {% if session.get('user') %}
+          <!-- ✅ Avatar Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: bold;">
+                {{ session['email'][0]|upper }}
+              </div>
+              <span class="ms-2">{{ session['user'] }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{{ url_for('edit_profile') }}">Edit Profile</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-glow" href="{{ url_for('signup') }}">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="toast-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        {% if category == 'special' %}
+          {% if message == 'welcome_back' %}
+          <div class="toast align-items-center text-bg-light border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" id="welcomeToast">
+            <div class="d-flex">
+              <div class="toast-body">
+                👋 Welcome back to BreatheSync!
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+          {% elif message == 'signup_success' %}
+          <div class="toast align-items-center text-bg-light border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" id="signupToast">
+            <div class="d-flex">
+              <div class="toast-body">
+                🎉 Thanks for signing up! Welcome to BreatheSync!
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endwith %}
+  </div>
+
+  <!-- About Section -->
+  <div class="about-wraper">
+    <section id="about" >
+      <h2 >About Us</h2>
+      <p> 
+       <p> 1. Purpose: It’s a wellness platform offering calm, balance, and emotional healing.</p>
+       <p> 2. Experience: BreatheSync helps people reduce stress, relax, and reconnect with themselves through mindfulness and inspiration.</p>
+       <p>3. Content Offered:
+             Relaxation videos (breathing, meditation, nature sounds)Motivational talks from inspiring speakers Blogs on mental health, self-care, and mindfulness</p>
+      <p> 4. Mission: To provide everyone with moments of peace, clarity, and motivation in their daily life.</p>
+        <p>5. Audience: Suitable for yoga beginners and wellness seekers.</p>
+      
+         
+        
+        <!-- Truncated for brevity -->
+      </p>
+    </section>
+  </div>
+  
+
+  <hr class="my-5" style="border-top: 2px solid #004d40;">
+
+ <!-- ✅ Stress Statistics Section --> 
+ <section id="stress-statistics" style="padding: 80px 20px 60px; background: linear-gradient(135deg, #d0f0f5, #e0f7f9);">
+  <div class="container">
+    <h2 class="text-center mb-5" style="color: black; font-size: 2.8rem;">🌍 Global & National Stress Statistics (as of 2024)</h2>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-5 col-md-6 col-sm-10">
+        <div class="stats-card h-100">
+          <h5 style="color: black;">🌎 Global Insights</h5>
+          <ul>
+            <li><strong>1 in 4</strong> people globally experience stress-related disorders (WHO Global Mental Health Report, 2023).</li>
+            <li><strong>75%–90%</strong> of doctor visits are linked to stress (American Institute of Stress, 2024).</li>
+            <li>Chronic stress can <strong>reduce life expectancy by up to 10 years</strong> (Harvard Health Study, 2023).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-md-6 col-sm-10">
+        <div class="stats-card h-100">
+          <h5 style="color: black;">India's Reality</h5>
+          <ul>
+            <li><strong>89%</strong> of Indian adults report feeling stressed daily, above the global average of 86% (Cigna 360 Well-Being Survey, 2024).</li>
+            <li><strong>50%</strong> of Indian employees experience work-related stress (ASSOCHAM Report, 2023).</li>
+            <li>Stress contributes to <strong>70%</strong> of lifestyle-related illnesses like hypertension, diabetes, and heart disease (Indian Council of Medical Research, 2024).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ Main Cause of Stress -->
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-8 col-md-10">
+        <div class="stats-card text-center">
+          <h3 style="color: black; font-weight: bold; margin-bottom: 20px;">Why Are We So Stressed?</h3>
+          <p style="font-size: 1.1rem; color: #333;">
+            Modern life overloads our minds and bodies. Constant work pressure, financial uncertainty, social comparison, information overload, and lack of sleep leads to stress.
+          </p>
+          <p style="margin-top: 20px; font-size: 1.1rem; color: black; font-weight: bold;">
+            But the good news is — mindful breathing, movement, emotional awareness, reading and viewing motivational content can reset our mind.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <p style="font-size: 1.3rem; font-weight: bold; color: Black;">Start your healing journey today — one mindful breath at a time. 🌱</p>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ Stress Relief Journey Section -->
+<section id="stress-relief-journey" style="padding: 80px 20px 60px; background: linear-gradient(135deg, #d0f0f5, #e0f7f9);">
+  <div class="container">
+    <h1 class="text-center mb-5" style="font-weight: bold; color: black; font-size: 2.8rem;">Your Stress Relief Journey with BreatheSync</h1>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Step 1 -->
+      <div class="col-lg-3 col-md-5 col-sm-10 journey-card d-flex align-items-start">
+        <div class="icon-circle icon-cyan">
+          <i class="fas fa-wind"></i>
+        </div>
+        <div>
+          <h5>Step 1: Master Box Breathing</h5>
+          <p>
+            Breathe in slowly for 4 counts... Hold your breath for 4 counts... Exhale for 4 counts... Hold again for 4 counts.
+            <br><br>
+            <strong>Box Breathing</strong> calms your mind, sharpens focus, and resets your nervous system — a secret of elite performers!
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="col-lg-3 col-md-5 col-sm-10 journey-card d-flex align-items-start">
+        <div class="icon-circle icon-green">
+          <i class="fas fa-spa"></i>
+        </div>
+        <div>
+          <h5>Step 2: Dive into Meditation & Yoga</h5>
+          <p>
+            After steady breathing, meditation becomes easier.  
+            Gentle yoga stretches and focused meditation sessions reduce stress hormones and boost emotional strength.  
+            <br><br>
+            Think of it as giving your mind a fresh morning shower — but from the inside.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="col-lg-3 col-md-5 col-sm-10 journey-card d-flex align-items-start">
+        <div class="icon-circle icon-teal">
+          <i class="fas fa-microphone-alt"></i>
+        </div>
+        <div>
+          <h5>Step 3: Stay Inspired with Motivation</h5>
+          <p>
+            Fuel your soul with stories of hope, courage, and transformation.  
+            Listening to positive voices daily can rewire your mindset, strengthen your emotional immunity, and uplift your spirit.
+            <br><br>
+            A few inspiring words can spark a whole new way of living.
+        </div>
+      </div>
+
+      <!-- BreatheSync Features -->
+      <div class="col-lg-5 col-md-7 col-sm-10 journey-card d-flex align-items-start">
+        <div class="icon-circle icon-purple">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div>
+          <h5>BreatheSync Features</h5>
+          <p>
+            Stress relief videos, breathing guides, motivational blogs, and chatbot — your total wellness companion.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✨ Breathing Dots Animation -->
+    <div class="breathing-dots mt-5 text-center">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <p style="margin-top: 15px; color: #004d40; font-weight: 500;">Breathe In... Breathe Out...</p>
+    </div>
+  </div>
+</section>
+
+<!-- ✨ Updated CSS -->
+<style>
+  /* Card Styles */
+  /* Card Styles */
+  .journey-card, .stats-card {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    min-height: 250px;
+    margin: 10px;
+    width: 100%;
+  }
+  
+  .journey-card:hover, .stats-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.15);
+  }
+
+  /* Icon Circle Styles */
+  .icon-circle {
+    padding: 16px;
+    border-radius: 50%;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background 0.4s, color 0.4s, transform 0.4s;
+  }
+
+  /* Icon Base Colors */
+  .icon-blue { background: #81d4fa; color: #01579b; }
+  .icon-cyan { background: #80deea; color: #006064; }
+  .icon-green { background: #a5d6a7; color: #1b5e20; }
+  .icon-teal { background: #b2dfdb; color: #004d40; }
+  .icon-purple { background: #ce93d8; color: #6a1b9a; }
+
+  /* Icon Hover Effect */
+  .icon-blue:hover,
+  .icon-cyan:hover,
+  .icon-green:hover,
+  .icon-teal:hover,
+  .icon-purple:hover {
+    color: #ffffff;
+    transform: scale(1.2);
+  }
+
+  /* Stats Card List Text */
+  .stats-card h5 {
+    color: #00796b;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .stats-card ul {
+    padding-left: 20px;
+    color: #333;
+    font-size: 1rem;
+  }
+
+  .stats-card ul li {
+    margin-bottom: 10px;
+  }
+
+  /* Responsive Adjustment */
+  @media (max-width: 768px) {
+    .journey-card, .stats-card {
+      min-height: auto;
+      margin: 10px 0;
+    }
+  }
+
+  /* Breathing Dots Animation */
+  .breathing-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .breathing-dots .dot {
+    width: 18px;
+    height: 18px;
+    background-color: #4db6ac;
+    border-radius: 50%;
+    animation: breathe 2s ease-in-out infinite alternate;
+  }
+
+  .breathing-dots .dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .breathing-dots .dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes breathe {
+    from { transform: scale(1); opacity: 0.7; }
+    to { transform: scale(1.5); opacity: 1; }
+  }
+</style>
+
+
+
+<!-- ✅ End of Stress Relief Journey Section -->
+
+  
+
+  <!-- BreatheSync Section -->
+  <section id="BreatheSync">
+    <h1>Benefits of BreatheSync</h1>
+    <div class="image-container">
+      <img src="{{ url_for('static',filename = 'images/Pose2.png.webp')}}" alt="pose" />
+      <div class="label t1" data-info="Deep breathing promotes a calm nervous system.">Promotes Calmness</div>
+      <div class="label t2" data-info="Breathing techniques help soothe mental clutter.">Soothes Mind</div>
+      <div class="label t3" data-info="Calm breathing patterns reduce stress hormones.">Relieves Stress</div>
+      <div class="label t4" data-info="Breathing slow and deep eases anxiety symptoms.">Eases Anxiety</div>
+    </div>
+    <h3>  Breathe. Relax. Grow. Let BreatheSync support your wellness journey.</h3>
+  </section>
+  <section class="video-gallery-section">
+    {% set is_logged_in = session.get('user') %}
+     <!-- 🧎 Yoga -->
+    <div class="video-category yoga">
+      <h2>🧎 Yoga</h2>
+      <div class="video-gallery">
+        <iframe src="https://www.youtube.com/embed/v7AYKMP6rOE" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/oBu-pQG6sTY" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/4pKly2JojMw" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/OQ6NfFIr2jw" allowfullscreen></iframe>
+      </div>
+      <a href="{{ url_for('yoga') if is_logged_in else url_for('login') }}" class="btn-more">
+        {{ 'View More' if is_logged_in else 'Login to View More' }}
+      </a>
+    </div>
+
+
+     <!-- 🧘 Meditation -->
+     <div class="video-category meditation">
+      <h2>🧘 Meditation</h2>
+      <div class="video-gallery">
+        <iframe src="https://www.youtube.com/embed/inpok4MKVLM" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/ZToicYcHIOU" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/MIr3RsUWrdo" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6p_yaNFSYao" allowfullscreen></iframe>
+      </div>
+      <a href="{{ url_for('meditation') if is_logged_in else url_for('login') }}" class="btn-more">
+        {{ 'View More' if is_logged_in else 'Login to View More' }}
+      </a>
+    </div>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- 🎵 Relaxation -->
+     
+    <div class="video-category relaxation">
+      <h2>🎵 Relaxation</h2>
+      <div class="video-gallery">
+        <iframe src="https://www.youtube.com/embed/2OEL4P1Rz04" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/lFcSrYw-ARY" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/aIIEI33EUqI" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/Hg1-NHJ7-sY" allowfullscreen></iframe>
+      </div>
+      <a href="{{ url_for('relaxation') if is_logged_in else url_for('login') }}" class="btn-more">
+        {{ 'View More' if is_logged_in else 'Login to View More' }}
+      </a>
+    </div>
+  
+   
+   
+    
+  
+    <!-- 🌿 Spiritual -->
+    <div class="video-category spiritual">
+      <h2>☘️Spiritual</h2>
+      <div class="video-gallery">
+        <iframe src="https://www.youtube.com/embed/Hbl1SdneXbI" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/2cXLrKP6WqE" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/ccBcAWE_lIY" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6IKwiV4dioQ" allowfullscreen></iframe>
+      </div>
+      <a href="{{ url_for('spiritual') if is_logged_in else url_for('login') }}" class="btn-more">
+        {{ 'View More' if is_logged_in else 'Login to View More' }}
+      </a>
+    </div>
+  </section>
+  
+
+  
+<!-- Chatbot Icon -->
+<!-- Chatbot Icon -->
+<div class="chatbot-icon" onmouseenter="showTooltip()" onmouseleave="hideTooltip()" onclick="toggleChat()">
+  <img src="{{ url_for('static', filename='images/WhatsApp Image 2025-04-19 at 11.19.19 PM.jpeg') }}" alt="Chatbot Icon" class="chatbot-logo-icon">
+  <div id="chatTooltip" class="chat-tooltip">Need any help?</div>
+</div>
+
+<!-- Chatbox -->
+<div id="chatbox" class="chatbot-box">
+  <div class="chatbot-header">BreatheBot 💬</div>
+  <div id="chatlog" class="chatbot-log"></div>
+  <input type="text" id="userInput" placeholder="Ask me something..." onkeypress="handleKey(event)">
+</div>
+
+
+
+
+  <!-- Feedback Section -->
+  
+  
+
+
+ 
+
+  <!-- Footer -->
+  <footer class="footer-section text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5>About Breathe Sync</h5>
+          <p>Your digital space for peace, mindfulness, and self-care.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="{{ url_for('home') }}" class="text-white">Home</a></li>
+            <li><a href="{{ url_for('home') }}#about" class="text-white">About Us</a></li>
+            <li><a href="{{ url_for('blog') }}" class="text-white">Blog</a></li>
+            <li><a href="{{ url_for('home') }}#contact" class="text-white">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Contact Us</h5>
+          <p>Email: info@breathesync.com</p>
+          <p>Phone: +91 8766858166</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/p/15dSDcHVSF/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/chirag_shetty_007/profilecard/?igsh=cTBucjBwZmNxODIx"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/PrathmeshHaris1?t=DFpxhFr-P_u68ywiuSPPow&s=09"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <hr style="border-color: rgba(255,255,255,0.2);" />
+        <p class="mb-0">© 2025 Breathe Sync. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+<style>
+  
+</style>
+  <!-- JS Libraries -->
+  <script src="{{ url_for('static', filename='js/Chatbot.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ✅ Login Check Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var welcomeToast = document.getElementById('welcomeToast');
+      var signupToast = document.getElementById('signupToast');
+  
+      if (welcomeToast) {
+        var toast1 = new bootstrap.Toast(welcomeToast, { delay: 3000 });
+        toast1.show();
+      }
+  
+      if (signupToast) {
+        var toast2 = new bootstrap.Toast(signupToast, { delay: 3000 });
+        toast2.show();
+      }
+    });
+  </script>
+  
+  
+  
+
+</body>
+</html>

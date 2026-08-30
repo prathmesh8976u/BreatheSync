@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | BreatheSync</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* (your same CSS for styling, no change) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #468f70, #020f1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 1.2s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .auth-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      color: #fff;
+    }
+    .auth-container h2 {
+      text-align: center;
+      color: #ffde59;
+      margin-bottom: 25px;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      background: #f0f0f0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #333;
+    }
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: #666;
+      cursor: pointer;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #ffde59, #ffe97f);
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #1a1a1a;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #ffde59;
+    }
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #ffde59;
+    }
+    .link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+    .link a {
+      color: #00f7ff;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
+    .link a:hover {
+      color: #ffde59;
+      text-decoration: underline;
+    }
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+    .message.success {
+      color: #00ff88;
+    }
+    .message.error {
+      color: #ff4d4d;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Login to BreatheSync</h2>
+    <form method="POST" action="/login">
+      <div class="input-group">
+        <input type="email" name="email" placeholder="Email Address" required />
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" id="loginPassword" placeholder="Password" required />
+        <i class="fa-solid fa-eye" onclick="togglePassword('loginPassword', this)"></i>
+      </div>
+      <button type="submit">Log In</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="link">
+      Don't have an account? <a href="/signup">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(fieldId, icon) {
+      const input = document.getElementById(fieldId);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+  </script>
+</body>
+</html>

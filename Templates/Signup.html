@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up | BreatheSync</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* (Same CSS you gave, kept intact) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #468f70, #020f1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 1.2s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .auth-container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      color: #fff;
+    }
+    .auth-container h2 {
+      text-align: center;
+      color: #ffde59;
+      margin-bottom: 25px;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      background: #f0f0f0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #333;
+    }
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: #666;
+      cursor: pointer;
+    }
+    .terms {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    .terms input {
+      margin-right: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #ffde59, #ffe97f);
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #1a1a1a;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #ffde59;
+    }
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #ffde59;
+    }
+    .link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+    .link a {
+      color: #00f7ff;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
+    .link a:hover {
+      color: #ffde59;
+      text-decoration: underline;
+    }
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.95rem;
+    }
+    .message.error {
+      color: #ff4d4d;
+    }
+    .message.success {
+      color: #00ff88;
+    }
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      color: #000;
+      font-size: 1rem;
+      position: relative;
+    }
+    .modal-content h3 {
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+    .modal-content .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      color: #333;
+      cursor: pointer;
+    }
+    .modal-content a {
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Create Your Account</h2>
+
+    <form method="POST" action="/signup">
+      <div class="input-group">
+        <input type="text" name="username" placeholder="Full Name" required />
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="input-group">
+        <input type="email" name="email" placeholder="Email Address" required />
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" id="signupPassword" placeholder="Password" required />
+        <i class="fa-solid fa-eye" onclick="togglePassword('signupPassword', this)"></i>
+      </div>
+
+      <div class="terms">
+        <input type="checkbox" name="terms" id="terms" required />
+        <label for="terms">
+          I agree to the <a href="javascript:void(0);" onclick="openModal()">terms & conditions</a>
+        </label>
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <!-- Modal for Terms and Conditions -->
+    <div id="termsModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Terms and Conditions</h3>
+        <p>
+          By using BreatheSync, you agree to use the platform for personal wellness only.
+          Do not share your login credentials, and avoid any misuse of the chatbot or feedback system.
+          Your data is stored securely, and we do not share it with third parties.
+        </p>
+        <p>
+          Continued use of this service signifies your acceptance of these terms. For questions,
+          contact us at <a href="mailto:info@breathesync.com">info@breathesync.com</a>.
+        </p>
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="link">
+      Already have an account? <a href="/login">Log In</a>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(fieldId, icon) {
+      const input = document.getElementById(fieldId);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+
+    function openModal() {
+      document.getElementById("termsModal").style.display = "block";
+    }
+  
+    function closeModal() {
+      document.getElementById("termsModal").style.display = "none";
+    }
+  
+    window.onclick = function(event) {
+      const modal = document.getElementById("termsModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+</html>

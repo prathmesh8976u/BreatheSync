@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BreatheSync</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/BreatheSync.css') }}" />
+</head>
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/ChatGPT Image Apr 9, 2025, 10_29_52 AM.png') }}" alt="BreatheSync" class="navbar-logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}#about"><i class="fas fa-info-circle"></i> About Us</a>
+          </li>
+
+          <li class="nav-item dropdown protected-link">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-leaf"></i> Categories</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('yoga') }}">🧎 Yoga</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('meditation') }}">🧘‍♂️ Meditation</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('relaxation') }}">🎵 Relaxation</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('spiritual') }}">☘️ Spiritual</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown protected-link">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">🎤 Motivational Speakers</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#Gopal">😄 Gaur Gopal das</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#sad">🧙‍♂️ Sadhguru</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#Nicholas">🌟 Nicholas James Vujicic</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#tony">⚡ Tony Robbins</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item protected-link">
+            <a class="nav-link" href="{{ url_for('blog') }}"><i class="fas fa-blog"></i> Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('feedback') }}"><i class="fas fa-comments"></i> Feedback</a>
+          </li>
+        </ul>
+       
+        
+        
+
+        <ul class="navbar-nav ms-auto">
+          {% if session.get('user') %}
+          <!-- ✅ Avatar Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: bold;">
+                {{ session['email'][0]|upper }}
+              </div>
+              <span class="ms-2">{{ session['user'] }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{{ url_for('edit_profile') }}">Edit Profile</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-glow" href="{{ url_for('signup') }}">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ✅ Blog Section Start -->
+<!-- ✅ Blog Section Start -->
+<!-- ✅ Blog Section Start -->
+<!-- ✅ Blog Section Start -->
+<section id="blog-section" style="padding: 120px 20px 60px; background: linear-gradient(to right, #e0f7fa, #e0f2f1); min-height: 100vh;">
+  <div class="container">
+    <h1 class="text-center mb-5" style="color: black; font-weight: bold;">BreatheSync Blogs</h1>
+
+    <!-- Blog 1 -->
+    <div class="card blog-card mb-5 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+      <div class="card-body" style="background:linear-gradient(135deg, #a1c4fd, #c2e9fb);">
+        <h2 style="color: black;">Breathe In, Let Go: The Simple Art of Daily Stress Relief</h2>
+        <p id="blog1-short" style="color: #444; text-align: justify;">
+          In a world that never seems to slow down, finding peace can feel like chasing the horizon. Deadlines, social media notifications, constant responsibilities — they all pile up until our minds feel cluttered and overwhelmed...
+        </p>
+        <p id="blog1-full" style="display: none; color: #444; text-align: justify;">
+          At BreatheSync, we believe that peace isn’t something you have to chase.
+          It’s already within you — you just need a moment to reconnect.<br><br>
+
+          <b>The Power of a Single Breath</b><br>
+          Have you ever noticed how a deep breath can instantly change how you feel?
+          Science shows that mindful breathing signals the brain to relax, slowing your heart rate and easing tension in your muscles.
+          When life feels too much, one conscious breath can be the first step back to balance.
+          <br><br>
+
+          <b>Simple Daily Rituals to Find Calm</b><br>
+          You don't need fancy equipment or an hour of free time.
+          You only need small moments of intention sprinkled through your day:
+          <br>
+          • <b>Morning Pause:</b> Before you grab your phone, sit up in bed, place your hand on your heart, and take three deep breaths.<br>
+          • <b>Nature Break:</b> Step outside for five minutes. Listen to the wind, watch the sky, and feel your feet connect with the earth.<br>
+          • <b>Gratitude Breath:</b> Each night, breathe deeply and mentally list three things you’re grateful for — no matter how small.
+          <br><br>
+
+          These simple rituals retrain your brain to find peace, even on the busiest days.
+          <br><br>
+
+          <b>BreatheSync: Your Partner in Inner Peace</b><br>
+          Our videos, blogs, and guided sessions are here to support your journey back to yourself. Whether you need calming yoga, meditations, motivational talks, or spiritual reflections, BreatheSync offers a sanctuary of calm just a click away.
+          <br><br>
+
+          Stress might be part of life. But it doesn’t have to define your life.
+          You hold the power to breathe in calm and let go of stress — every single day.
+          <br><br>
+
+          Let’s start today.
+          <br>
+          Take a breath. Feel it. That’s where peace begins.
+          <br><br>
+          <i>— Written by BreatheSync</i>
+        </p>
+        <button onclick="toggleBlog('blog1')" class="btn btn-primary btn-sm mt-2">Read More</button>
+      </div>
+    </div>
+
+    <!-- Blog 2 -->
+    <div class="card blog-card mb-5 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+      <div class="card-body" style="background:linear-gradient(135deg, #a1c4fd, #c2e9fb);">
+        <h2 style="color: black;">Finding Stillness in a Noisy World</h2>
+        <p id="blog2-short" style="color: #444; text-align: justify;">
+          The world is louder than ever. News alerts, endless scrolling, constant demands on our time — they create a background hum of pressure that’s hard to escape...
+        </p>
+        <p id="blog2-full" style="display: none; color: #444; text-align: justify;">
+          But somewhere beneath all that noise, there’s a stillness inside you.
+          A place where peace is not something you earn — it’s something you remember.<br><br>
+
+          At BreatheSync, we believe stillness isn’t about turning life off.
+          It’s about tuning life in — to the quiet wisdom within you.
+          <br><br>
+
+          <b>The Beauty of Slowing Down</b><br>
+          Imagine a river rushing so fast that it can't reflect anything on its surface.
+          Now imagine that same river, flowing gently, becoming so calm that it mirrors the sky perfectly.
+          <br><br>
+
+          When we pause — even for a moment — our inner world becomes clearer.
+          We start to hear the small whispers of our own intuition, creativity, and gratitude that are too often drowned out by external noise.
+          <br><br>
+
+          <b>Simple Ways to Find Stillness</b><br>
+          • <b>Silent Mornings:</b> Spend the first 10 minutes after waking in complete silence.<br>
+          • <b>Mindful Listening:</b> Listen fully when someone speaks.<br>
+          • <b>Sacred Spaces:</b> Create a small corner in your home that feels peaceful.
+          <br><br>
+
+          <b>BreatheSync: Your Oasis of Calm</b><br>
+          Our resources — from guided meditations to spiritual reflections — are designed to help you slow down and hear your own heartbeat again.
+          <br><br>
+
+          Stillness isn’t about escaping life.
+          It’s about entering it more fully — with a peaceful mind and an open heart.
+          <br><br>
+
+          Take a deep breath.
+          Sink into the stillness.
+          You’re already home.
+          <br><br>
+
+          <i>— Written by BreatheSync</i>
+        </p>
+        <button onclick="toggleBlog('blog2')" class="btn btn-primary btn-sm mt-2">Read More</button>
+      </div>
+    </div>
+  <!-- Blog 3 -->
+<div class="card blog-card mb-5 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+  <div class="card-body" style="background:linear-gradient(135deg, #a1c4fd, #c2e9fb);">
+    <h2 style="color: black;">5 Daily Habits for Lasting Inner Peace</h2>
+    <p id="blog3-short" style="color: #444; text-align: justify;">
+      Inner peace isn’t a destination — it’s a daily practice. Even in a busy world, you can cultivate moments of calm that ripple through your entire life...
+    </p>
+    <p id="blog3-full" style="display: none; color: #444; text-align: justify;">
+      At BreatheSync, we believe that even in a busy world, you can cultivate moments of calm that ripple through your entire life.<br><br>
+
+      <b>1. Start Your Day with Stillness:</b> Sit quietly for five minutes. Focus on your breath. Set an intention like: "Today, I choose calm."<br><br>
+
+      <b>2. Connect with Nature:</b> Walk outside, sit under a tree, or simply watch the sky to reset your inner balance.<br><br>
+
+      <b>3. Practice Gratitude Journaling:</b> Each evening, write down three things you’re grateful for.<br><br>
+
+      <b>4. Breathe Through Stressful Moments:</b> Pause, take three deep breaths to soften stress.<br><br>
+
+      <b>5. End the Day with Reflection:</b> Ask yourself: "What brought me peace today?" and notice the patterns.<br><br>
+
+      Small habits. Big transformations.<br><br>
+
+      <i>— Written by BreatheSync</i>
+    </p>
+    <button onclick="toggleBlog('blog3')" class="btn btn-primary btn-sm mt-2">Read More</button>
+  </div>
+</div>
+
+<!-- Blog 4 -->
+<div class="card blog-card mb-5 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+  <div class="card-body" style="background:linear-gradient(135deg, #a1c4fd, #c2e9fb);">
+    <h2 style="color: black;">The Spiritual Art of Letting Go</h2>
+    <p id="blog4-short" style="color: #444; text-align: justify;">
+      Holding on is heavy. We cling to old hurts and fears — and wonder why we feel tired or stuck...
+    </p>
+    <p id="blog4-full" style="display: none; color: #444; text-align: justify;">
+      At BreatheSync, we believe letting go isn’t giving up — it’s setting yourself free.<br><br>
+
+      <b>Why We Struggle to Let Go:</b><br>
+      The mind clings to the familiar because it fears the unknown. True peace comes from trusting you will rise no matter what.<br><br>
+
+      <b>The Gentle Practice of Letting Go:</b><br>
+      • Acknowledge what you’re holding onto.<br>
+      • Feel your emotions without judgment.<br>
+      • Visualize releasing the burden like a balloon.<br><br>
+
+      Freedom lives on the other side of letting go.<br><br>
+
+      Every breath out is a practice of release. Every breath in is a reminder: you are growing, you are free.<br><br>
+
+      <i>— Written by BreatheSync</i>
+    </p>
+    <button onclick="toggleBlog('blog4')" class="btn btn-primary btn-sm mt-2">Read More</button>
+  </div>
+</div>
+
+<!-- Blog 5 -->
+<div class="card blog-card mb-5 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease;">
+  <div class="card-body" style="background:linear-gradient(135deg, #a1c4fd, #c2e9fb);">
+    <h2 style="color: black;">How Motivation and Relaxation Work Together</h2>
+    <p id="blog5-short" style="color: #444; text-align: justify;">
+      Many think motivation means pushing harder and relaxation means stopping completely — but true success comes when you learn to blend both...
+    </p>
+    <p id="blog5-full" style="display: none; color: #444; text-align: justify;">
+      Motivation without rest burns out fast.<br><br>
+
+      <b>Motivation Without Burnout:</b><br>
+      Move naturally from passion, not pressure. Motivation needs rest to stay alive.<br><br>
+
+      <b>Relaxation Fuels Resilience:</b><br>
+      Rest renews energy, focus, and creativity. Rest isn't weakness — it is strength.<br><br>
+
+      <b>Living in Rhythm:</b><br>
+      Inhale dreams and goals. Exhale reflection and renewal. Breathe deeply, live fully.<br><br>
+
+      At BreatheSync, we help you move forward with passion — and rest with grace.<br><br>
+
+      <i>— Written by BreatheSync</i>
+    </p>
+    <button onclick="toggleBlog('blog5')" class="btn btn-primary btn-sm mt-2">Read More</button>
+  </div>
+</div>
+
+
+
+    
+
+  
+</section>
+<!-- ✅ Blog Section End -->
+
+<!-- 📜 Script to Toggle Blogs -->
+<script>
+  function toggleBlog(blogId) {
+    const shortPara = document.getElementById(`${blogId}-short`);
+    const fullPara = document.getElementById(`${blogId}-full`);
+    const button = shortPara.nextElementSibling.nextElementSibling; // points to button
+
+    if (fullPara.style.display === "none") {
+      fullPara.style.display = "block";
+      shortPara.style.display = "none";
+      button.innerText = "Show Less";
+    } else {
+      fullPara.style.display = "none";
+      shortPara.style.display = "block";
+      button.innerText = "Read More";
+    }
+  }
+
+  // ✨ Add hover animation on blog cards
+  document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.blog-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'scale(1.02)';
+        card.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'scale(1)';
+        card.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.1)';
+      });
+    });
+  });
+</script>
+
+
+<!-- ✅ Blog Section End -->
+
+
+
+
+  
+
+  <!-- Footer -->
+  <footer class="footer-section text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5>About Breathe Sync</h5>
+          <p>Your digital space for peace, mindfulness, and self-care.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="{{ url_for('home') }}" class="text-white">Home</a></li>
+            <li><a href="{{ url_for('home') }}#about" class="text-white">About Us</a></li>
+            <li><a href="{{ url_for('blog') }}" class="text-white">Blog</a></li>
+            <li><a href="{{ url_for('home') }}#contact" class="text-white">Contact</a></li>
+          </ul>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Contact Us</h5>
+          <p>Email: info@breathesync.com</p>
+          <p>Phone: +91 8766858166</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/p/15dSDcHVSF/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/chirag_shetty_007/profilecard/?igsh=cTBucjBwZmNxODIx"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/PrathmeshHaris1?t=DFpxhFr-P_u68ywiuSPPow&s=09"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <hr style="border-color: rgba(255,255,255,0.2);" />
+        <p class="mb-0">© 2025 Breathe Sync. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+<style>
+  
+</style>
+  <!-- JS Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ✅ Login Check Script -->
+  <script>
+    // Optional: Enable dropdowns manually (useful for custom behavior or JS-only issues)
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropdownTriggerList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+      dropdownTriggerList.map(function (dropdownToggleEl) {
+        return new bootstrap.Dropdown(dropdownToggleEl);
+      });
+    });
+  </script>
+  
+  
+  
+</body>
+</html>

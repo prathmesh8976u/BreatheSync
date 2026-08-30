@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BreatheSync</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/BreatheSync.css') }}" />
+</head>
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/ChatGPT Image Apr 9, 2025, 10_29_52 AM.png') }}" alt="BreatheSync" class="navbar-logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}#about"><i class="fas fa-info-circle"></i> About Us</a>
+          </li>
+
+          <li class="nav-item dropdown protected-link">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-leaf"></i> Categories</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('yoga') }}">🧎 Yoga</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('meditation') }}">🧘‍♂️ Meditation</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('relaxation') }}">🎵 Relaxation</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('spiritual') }}">☘️ Spiritual</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown protected-link">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">🎤 Motivational Speakers</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#Gopal">😄 Gaur Gopal das</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#sad">🧙‍♂️ Sadhguru</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#Nicholas">🌟 Nicholas James Vujicic</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#tony">⚡ Tony Robbins</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item protected-link">
+            <a class="nav-link" href="{{ url_for('blog') }}"><i class="fas fa-blog"></i> Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('feedback') }}"><i class="fas fa-comments"></i> Feedback</a>
+          </li>
+        </ul>
+       
+        
+        
+
+        <ul class="navbar-nav ms-auto">
+          {% if session.get('user') %}
+          <!-- ✅ Avatar Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: bold;">
+                {{ session['email'][0]|upper }}
+              </div>
+              <span class="ms-2">{{ session['user'] }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{{ url_for('edit_profile') }}">Edit Profile</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-glow" href="{{ url_for('signup') }}">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  
+  
+  <!-- Relaxation Videos Section -->
+
+
+  <div class="relaxation-video-section">
+    <h2 class="section-title">Meditation Videos 🧘‍♂️ </h2>
+    
+
+     <p style="color: Black; font-size: 1.1rem; margin-top: 10px; margin-bottom: 30px;">
+      We are providing you Meditation videos categorized into <strong>10 minutes</strong> and <strong>15 minutes</strong> durations for a quick stress relief experience. 🧘‍♂️ 
+    </p>
+    <style>
+    p strong {
+      font-weight: bold;
+      color: Black;
+    }
+  </style>
+    
+    <!-- Category Tabs -->
+    <div class="category-buttons">
+      <button class="category-btn active" onclick="showCategory('ten-minutes')">10 Minutes</button>
+      <button class="category-btn" onclick="showCategory('fifteen-minutes')">15 Minutes</button>
+    </div>
+  
+    <!-- 10 Minutes Category -->
+    <div class="video-grid category ten-minutes">
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/ZToicYcHIOU" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/ENYYb5vIMkU" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/xv-ejEOogaA" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/cyMxWXlX9sU" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/j7d5Plai03g" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/2FGR-OspxsU" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/vj0JDwQLof4" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/ZToicYcHIOU" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="http://www.youtube.com/embed/FGO8IWiusJo" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/ihwcw_ofuME" allowfullscreen></iframe></div>
+    </div>
+    <!-- 15-Minute Category -->
+    <div class="video-grid category fifteen-minutes" style="display: none;">
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/z0GtmPnqAd8" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/W19PdslW7iw" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/aIIEI33EUqI" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/itZMM5gCboo" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/UAEqdo0Dn-k" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/MIr3RsUWrdo" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/xufnnuOqGV4" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/qqks74DW0DE" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/XnT_cOq_Ba8" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/YWDRFZFCrGE" allowfullscreen></iframe></div>
+    </div>
+    </div>
+  
+
+  
+
+ 
+
+  <!-- Footer -->
+  <footer class="footer-section text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5>About Breathe Sync</h5>
+          <p>Your digital space for peace, mindfulness, and self-care.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Contact Us</h5>
+          <p>Email: info@breathesync.com</p>
+          <p>Phone: +91 8766858166</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/p/15dSDcHVSF/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/chirag_shetty_007/profilecard/?igsh=cTBucjBwZmNxODIx"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/PrathmeshHaris1?t=DFpxhFr-P_u68ywiuSPPow&s=09"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <hr style="border-color: rgba(255,255,255,0.2);" />
+        <p class="mb-0">© 2025 Breathe Sync. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+<style>
+  
+</style>
+  <!-- JS Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ✅ Login Check Script -->
+  <script>
+    // Optional: Enable dropdowns manually (useful for custom behavior or JS-only issues)
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropdownTriggerList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+      dropdownTriggerList.map(function (dropdownToggleEl) {
+        return new bootstrap.Dropdown(dropdownToggleEl);
+      });
+    });
+  </script>
+
+<script>
+  function showCategory(category) {
+    document.querySelectorAll('.category').forEach(function (el) {
+      el.style.display = 'none';
+    });
+    document.querySelector('.' + category).style.display = 'grid';
+  
+    document.querySelectorAll('.category-btn').forEach(function (btn) {
+      btn.classList.remove('active');
+    });
+    if (category === 'ten-minutes') {
+      document.querySelector('.category-btn:nth-child(1)').classList.add('active');
+    } else {
+      document.querySelector('.category-btn:nth-child(2)').classList.add('active');
+    }
+  }
+  </script>
+  
+  
+  
+</body>
+</html>

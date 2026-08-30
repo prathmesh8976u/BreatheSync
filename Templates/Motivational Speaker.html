@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BreatheSync</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/BreatheSync.css') }}" />
+</head>
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/ChatGPT Image Apr 9, 2025, 10_29_52 AM.png') }}" alt="BreatheSync" class="navbar-logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}#about"><i class="fas fa-info-circle"></i> About Us</a>
+          </li>
+
+          <li class="nav-item dropdown protected-link">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fas fa-leaf"></i> Categories</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('yoga') }}">🧎 Yoga</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('meditation') }}">🧘‍♂️ Meditation</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('relaxation') }}">🎵 Relaxation</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('spiritual') }}">☘️ Spiritual</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown protected-link">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">🎤 Motivational Speakers</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#Gopal">😄 Gaur Gopal das</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#sad">🧙‍♂️ Sadhguru</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#Nicholas">🌟 Nicholas James Vujicic</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('motivation') }}#tony">⚡ Tony Robbins</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item protected-link">
+            <a class="nav-link" href="{{ url_for('blog') }}"><i class="fas fa-blog"></i> Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('feedback') }}"><i class="fas fa-comments"></i> Feedback</a>
+          </li>
+        </ul>
+       
+        
+        
+
+        <ul class="navbar-nav ms-auto">
+          {% if session.get('user') %}
+          <!-- ✅ Avatar Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: bold;">
+                {{ session['email'][0]|upper }}
+              </div>
+              <span class="ms-2">{{ session['user'] }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{{ url_for('edit_profile') }}">Edit Profile</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-glow" href="{{ url_for('signup') }}">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Gopal Section -->
+ <!-- ✅ Gaur Gopal Das Section -->
+<!-- ✅ Gaur Gopal Das Section -->
+<section id="Gopal" class="speaker-section">
+  <div class="speaker-wrapper">
+    <div class="speaker-content">
+      <div class="speaker-image">
+        <img src="{{ url_for('static', filename='images/IMG_20250426_115922 (1).jpg') }}" alt="Gaur Gopal Das">
+        <div class="speaker-name">Gaur Gopal Das</div>
+      </div>
+      <div class="speaker-info">
+        
+        <p><strong>Gaur Gopal Das</strong> ( born 24 December 1973) is an Indian motivational speaker. He is a member of the International Society for Krishna Consciousness (ISKCON). He is author of book life's amazing secrets</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Videos -->
+  <div class="video-grid">
+   <div class="video-card"><iframe src="https://www.youtube.com/embed/5bAPll9w1_A" allowfullscreen></iframe></div>
+   <div class="video-card"><iframe src="https://www.youtube.com/embed/PReWdfg2cM8" allowfullscreen></iframe></div>
+   <div class="video-card"><iframe src="https://www.youtube.com/embed/8dbM9-9Cfu0" allowfullscreen></iframe></div>
+   <div class="video-card"><iframe src="https://www.youtube.com/embed/tgl5UbEqgYk" allowfullscreen></iframe></div>
+   <div class="video-card"><iframe src="https://www.youtube.com/embed/pQwfE94PXGA" allowfullscreen></iframe></div>
+   <div class="video-card"><iframe src="https://www.youtube.com/embed/AdO8Z7hr4Aw" allowfullscreen></iframe></div>
+  </div>
+</section>
+
+<!-- ✅ Sadhguru Section -->
+<section id="sad" class="speaker-section">
+  <div class="speaker-wrapper">
+    <div class="speaker-content">
+      <div class="speaker-image">
+        <img src="{{ url_for('static', filename='images/WhatsApp Image 2025-04-21 at 10.24.25 AM.jpeg') }}" alt="Sadhguru">
+        <div class="speaker-name">Sadhguru</div>
+      </div>
+      <div class="speaker-info">
+        
+        <p><strong>Jagadish "Jaggi" Vasudev</strong> (born 3 September, 1957), founder of the Isha Foundation. Since 1992, he has been offering educational and spiritual activities. Author of <em>Inner Engineering</em> and an international Motivativational speaker.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Videos -->
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/EdNn-pvpgmI" allowfullscreen></iframe>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/Qy0tehiU9zE" allowfullscreen></iframe>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/BjVPyzegUOQ" allowfullscreen></iframe>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/610g5oTkcHs" allowfullscreen></iframe>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/d8p-5WcXoRs" allowfullscreen></iframe>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/K2S5-_AgckA" allowfullscreen></iframe>
+    </div>
+    
+  </div>
+</section>
+
+<!-- ✅ Nicholas James Vujicic Section -->
+<section id="Nicholas" class="speaker-section">
+  <div class="speaker-wrapper">
+    <div class="speaker-content">
+      <div class="speaker-image">
+        <img src="{{ url_for('static', filename='images/IMG_20250426_122134.jpg') }}" alt="Nicholas James Vujicic">
+        <div class="speaker-name">Nicholas James Vujicic</div>
+      </div>
+      <div class="speaker-info">
+       
+        <p><strong>Nicholas James Vujicic</strong> (born 4 December 1982) is an Australian-American evangelist and motivational speaker of Serbian descent. He was born with tetra-amelia syndrome, a rare disorder characterized by the absence of arms and legs. He is author of Be the hands and feet</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Videos -->
+ 
+    <div class="video-grid">
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/7XMqWQn9P5k" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/vpZEVE8NjFE" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/yAiTMaipAG8" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/LvFOuPGWk_k" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/SSnPcjZYVDg" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/pfNGP8Yzc28" allowfullscreen></iframe></div>
+     
+</div>
+</section>
+
+<!-- ✅ Tony Robbins Section -->
+<section id="tony" class="speaker-section">
+  <div class="speaker-wrapper">
+    <div class="speaker-content">
+      <div class="speaker-image">
+        <img src="{{ url_for('static', filename='images/WhatsApp Image 2025-04-21 at 10.15.39 AM.jpeg') }}" alt="Tony Robbins">
+        <div class="speaker-name">Tony Robbins</div>
+      </div>
+      <div class="speaker-info">
+       
+        <p><strong>Anthony Jay Robbins</strong> (born February 29, 1960) is an American author, coach, and motivational speaker. Famous for his seminars and books like <em>Unlimited Power</em> and <em>Awaken the Giant Within</em>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Videos -->
+  <div class="video-grid">
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/8j8UuH8tocg" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/9EJyUijqfEY" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/zxtFZc8qeug" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/EguMjgRMA7Q" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/nf9GFhKO7Hs" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/60ROjGMqXUQ" allowfullscreen></iframe></div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="footer-section text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5>About Breathe Sync</h5>
+          <p>Your digital space for peace, mindfulness, and self-care.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="{{ url_for('home') }}" class="text-white">Home</a></li>
+            <li><a href="{{ url_for('home') }}#about" class="text-white">About Us</a></li>
+            <li><a href="{{ url_for('blog') }}" class="text-white">Blog</a></li>
+            <li><a href="{{ url_for('home') }}#contact" class="text-white">Contact</a></li>
+          </ul>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Contact Us</h5>
+          <p>Email: info@breathesync.com</p>
+          <p>Phone: +91 8766858166</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/p/15dSDcHVSF/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/chirag_shetty_007/profilecard/?igsh=cTBucjBwZmNxODIx"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/PrathmeshHaris1?t=DFpxhFr-P_u68ywiuSPPow&s=09"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <hr style="border-color: rgba(255,255,255,0.2);" />
+        <p class="mb-0">© 2025 Breathe Sync. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+<style>
+  
+</style>
+  <!-- JS Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ✅ Login Check Script -->
+  <script>
+    // Optional: Enable dropdowns manually (useful for custom behavior or JS-only issues)
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropdownTriggerList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+      dropdownTriggerList.map(function (dropdownToggleEl) {
+        return new bootstrap.Dropdown(dropdownToggleEl);
+      });
+    });
+  </script>
+  
+  
+  
+</body>
+</html>
