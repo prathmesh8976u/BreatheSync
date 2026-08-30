@@ -130,3 +130,45 @@ BreatheSync/
 ├── BreatheSync Presentation.pptx
 │
 └── README.md
+
+
+
+# 📸 Project Screenshots
+
+## 🏠 About Us
+
+![BreatheSync About Us](BreatheSync_AboutUs.png)
+
+The About Us page provides an overview of BreatheSync, including its purpose, experience, content, mission, and target audience.
+
+---
+
+## 🧘 Meditation
+
+![BreatheSync Meditation](BreatheSync_Meditation.png)
+
+The Meditation section provides users with meditation videos categorized into 10-minute and 15-minute sessions.
+
+---
+
+## 🧘‍♀️ Yoga
+
+![BreatheSync Yoga](BreatheSync_Yoga.png)
+
+The Yoga section provides yoga videos categorized into 10-minute and 15-minute sessions for users looking for short wellness activities.
+
+---
+
+## 🎤 Motivational Speakers
+
+![BreatheSync Motivational Speakers](BreatheSync_MotivationalSpeakers.png)
+
+The Motivational Speakers section provides motivational content from inspiring speakers.
+
+---
+
+## 💬 Feedback
+
+![BreatheSync Feedback](BreatheSync_Feedback.png)
+
+The Feedback section allows users to provide their name, email, ratings, and feedback about their experience with the platform.
