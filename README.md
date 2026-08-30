@@ -1,18 +1,12 @@
 # BreatheSync 🌿
 
-BreatheSync is a web-based stress-relief and wellness platform developed as my **BCA Final-Year Project**.
-
-The main purpose of BreatheSync is to provide users with a digital space where they can explore meditation, yoga, motivational content, wellness blogs, and other self-care resources through a simple and user-friendly web application.
-
----
-
 ## 📌 Project Overview
 
-BreatheSync is designed as a wellness platform focused on helping users explore content related to relaxation, mindfulness, motivation, yoga, and self-care.
+BreatheSync is a web-based stress-relief and wellness platform developed as my **BCA Final-Year Project**.
 
-The platform brings different types of wellness resources together in one place. Users can explore meditation and yoga videos, discover motivational speakers, read wellness blogs, and provide feedback about their experience.
+The platform provides users with a digital space to explore meditation, yoga, motivational content, wellness blogs, and self-care resources through a simple and user-friendly web application.
 
-The project also includes user authentication functionality through registration and login pages.
+BreatheSync brings different wellness resources together in one platform and provides features such as user registration, login, profile management, wellness content, and user feedback.
 
 ---
 
@@ -20,15 +14,14 @@ The project also includes user authentication functionality through registration
 
 The main objectives of BreatheSync are:
 
-- To create a centralized platform for wellness-related content.
-- To provide easy access to meditation and yoga resources.
+- To develop a web-based platform focused on stress relief and wellness.
+- To provide users with easy access to meditation and relaxation resources.
+- To provide guided yoga and meditation content.
 - To provide motivational content from inspiring speakers.
-- To provide wellness and mindfulness-related blogs.
-- To encourage relaxation and self-care.
-- To create a simple and user-friendly website interface.
-- To allow users to register and log in to the platform.
-- To provide a feedback system for collecting user opinions.
-- To develop a practical web application as part of the BCA final-year project.
+- To provide spiritual and wellness-related content.
+- To provide personalized content suggestions based on user conditions through the chatbot.
+- To collect user feedback and improve the platform.
+- To create a simple and user-friendly wellness platform.
 
 ---
 
@@ -36,83 +29,90 @@ The main objectives of BreatheSync are:
 
 ### 🧘 Meditation
 
-Users can explore meditation videos categorized into different durations, including:
-
-- 10-minute meditation sessions
-- 15-minute meditation sessions
-
-This makes it easier for users to choose content according to the time available to them.
+Provides meditation and relaxation videos categorized according to duration, helping users choose suitable content based on their available time.
 
 ### 🧘‍♀️ Yoga
 
-The Yoga section provides yoga videos categorized according to duration.
-
-Users can explore:
-
-- 10-minute yoga sessions
-- 15-minute yoga sessions
+Provides guided yoga videos that users can explore for relaxation and wellness.
 
 ### 🎤 Motivational Speakers
 
-The platform contains motivational content from inspiring speakers.
+Provides motivational videos and content from different motivational speakers.
 
-Users can explore speaker information and motivational videos designed to provide inspiration and positive motivation.
+### 🌿 Spiritual & Wellness Content
 
-### 📝 Wellness Blogs
+Provides spiritual and wellness-oriented content intended to support relaxation and inner peace.
 
-BreatheSync includes a dedicated blog section containing wellness and mindfulness-related articles.
+### 💬 NLP-Based Chatbot
 
-The blog content covers topics such as:
+BreatheSync includes an integrated chatbot that uses **Natural Language Processing (NLP)** to understand user input and provide content suggestions.
 
-- Stress relief
-- Mindfulness
-- Self-care
-- Relaxation
-- Daily wellness practices
+For example, when a user indicates that they are feeling unmotivated, the chatbot can suggest motivational speaker content.
+
+### 🔐 User Registration
+
+Users can create an account by providing their:
+
+- Name
+- Email address
+- Password
+
+The registration system also includes input validation and checks for existing email addresses.
+
+### 🔑 User Login
+
+Registered users can log in to the platform using their email address and password.
+
+### 👤 User Profile
+
+Logged-in users can manage their profile information, including:
+
+- Name
+- Email
+- Password
+
+Users can also permanently delete their account.
 
 ### 💬 Feedback System
 
 Users can provide feedback about their experience with the platform.
 
-The feedback section includes fields for:
+The feedback system collects:
 
 - Name
 - Email
-- Overall experience
+- Rating
 - Service quality
 - Website usability
-- Additional feedback
-
-### 🔐 User Registration
-
-New users can create an account by providing:
-
-- Full name
-- Email address
-- Password
-- Terms and conditions agreement
-
-### 🔑 User Login
-
-Registered users can log in to the BreatheSync platform using their email address and password.
-
-### 👤 User Profile
-
-The application provides a user profile area for logged-in users.
+- Content satisfaction
+- Recommendations
+- Suggestions
 
 ---
 
 ## 🛠️ Technologies Used
 
-The project was developed using the following technologies:
+### Frontend
 
-- **Python**
-- **Flask**
-- **HTML5**
-- **CSS3**
-- **JavaScript**
-- **SQLite**
-- **Jinja2**
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap
+
+### Backend
+
+- Python
+- Flask
+- Jinja2
+
+### Database
+
+- SQLite
+- SQLAlchemy ORM
+
+### NLP
+
+- TextBlob
 
 ---
 
@@ -122,6 +122,9 @@ The project was developed using the following technologies:
 BreatheSync/
 │
 ├── Static/
+│   ├── css/
+│   ├── js/
+│   └── images/
 │
 ├── Templates/
 │
@@ -129,46 +132,10 @@ BreatheSync/
 │
 ├── BreatheSync Presentation.pptx
 │
+├── BreatheSync_AboutUs.png
+├── BreatheSync_Feedback.png
+├── BreatheSync_Meditation.png
+├── BreatheSync_MotivationalSpeakers.png
+├── BreatheSync_Yoga.png
+│
 └── README.md
-
-
-
-# 📸 Project Screenshots
-
-## 🏠 About Us
-
-![BreatheSync About Us](BreatheSync_AboutUs.png)
-
-The About Us page provides an overview of BreatheSync, including its purpose, experience, content, mission, and target audience.
-
----
-
-## 🧘 Meditation
-
-![BreatheSync Meditation](BreatheSync_Meditation.png)
-
-The Meditation section provides users with meditation videos categorized into 10-minute and 15-minute sessions.
-
----
-
-## 🧘‍♀️ Yoga
-
-![BreatheSync Yoga](BreatheSync_Yoga.png)
-
-The Yoga section provides yoga videos categorized into 10-minute and 15-minute sessions for users looking for short wellness activities.
-
----
-
-## 🎤 Motivational Speakers
-
-![BreatheSync Motivational Speakers](BreatheSync_MotivationalSpeakers.png)
-
-The Motivational Speakers section provides motivational content from inspiring speakers.
-
----
-
-## 💬 Feedback
-
-![BreatheSync Feedback](BreatheSync_Feedback.png)
-
-The Feedback section allows users to provide their name, email, ratings, and feedback about their experience with the platform.
